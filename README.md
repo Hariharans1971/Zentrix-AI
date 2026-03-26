@@ -1,33 +1,31 @@
-![YOLO Helmet Detection](https://github.com/Ahmad-Ali-Rafique/AI-Chatbot/blob/main/Ai-Chatbot.png)  <!-- Replace with a relevant image link -->
 
 
-### Ahmad Ali Rafique
+### Hariharan
 
 **AI & Machine Learning Specialist**
 
-Welcome to my Streamlit Chatbot project! I am Ahmad Ali Rafique, an enthusiastic AI and Machine Learning expert with a strong passion for developing intelligent systems that can solve real-world problems. My expertise lies in building and deploying machine learning models, working on deep learning projects, and creating interactive AI-driven applications.
+Welcome to my Streamlit Chatbot project! I am Hariharan, an enthusiastic AI and Machine Learning expert with a strong passion for developing intelligent systems that can solve real-world problems. My expertise lies in building and deploying machine learning models, working on deep learning projects, and creating interactive AI-driven applications.
 
 ### Professional Background
 
-I have completed various courses and certifications in the field of AI, Machine Learning, and Deep Learning, which have equipped me with the knowledge and skills to tackle complex challenges. My educational journey includes an internship at ITSOLERA focused on Deep Learning, where I was selected from thousands of applicants. I have also completed a Soft Skills Program, scoring 100%, which has enhanced my ability to communicate and collaborate effectively in professional settings.
+I have completed various courses and certifications in the field of AI, Machine Learning, and Deep Learning, which have equipped me with the knowledge and skills to tackle complex challenges. My educational journey includes an internship at Cloudside Technologies focused on Machine Learning, where I was selected from thousands of applicants. I have also completed a Soft Skills Program, scoring 100%, which has enhanced my ability to communicate and collaborate effectively in professional settings.
 
-In addition to my technical proficiency, I am an active contributor to the AI community through my [YouTube channel](https://www.youtube.com/@AhmadAliRafique) 'Ahmad Ali', where I share insights, tutorials, and project walkthroughs related to AI and ML.
 
 ### Project Highlights
 
-This project demonstrates my ability to integrate advanced AI models into a user-friendly interface. Using the [Google Gemini API](https://developers.google.com/generative-ai/), I have created a chatbot that can understand and respond to user queries effectively. The entire application is built using [Streamlit](https://streamlit.io/), making it easy to deploy and interact with.
+This project demonstrates my ability to integrate advanced AI models into a user-friendly interface. Using the [Groq API], I have created a chatbot that can understand and respond to user queries effectively. The entire application is built using [Streamlit](https://streamlit.io/), making it easy to deploy and interact with.
 
-- **Model Used**: Google Gemini (Model ID: `gemini-1.5-flash`)
-- **API Integration**: Integrated using the Google Generative AI Python package.
+- **Model Used**: Groq (Model ID: "llama-3.3-70b-versatile")
+- **API Integration**: Integrated using the Groq AI Python package.
 - **User Interface**: Developed with Streamlit, ensuring a seamless user experience.
 
 ### Contact Information
 
 Feel free to reach out if you have any questions or collaboration opportunities:
 
-- **LinkedIn**: [Ahmad Ali Rafique](https://www.linkedin.com/in/ahmad-ali-rafique/)
-- **GitHub**: [Ahmad-Ali-Rafique](https://github.com/Ahmad-Ali-Rafique/)
-- **Email**: [arsbussiness786@gmail.com](mailto:arsbussiness786@gmail.com)
+- **LinkedIn**: [Hariharan](https://www.linkedin.com/in/hari-haran-b5aa50272/)
+- **GitHub**: [Hariharan](https://github.com/hariharansuresh1971-dotcom)
+- **Email**: [hariharansuresh1971@gmail.com].
 
 ### Why This Project?
 
