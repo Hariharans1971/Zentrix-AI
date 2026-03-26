@@ -1,55 +1,131 @@
+from groq import Groq
 import streamlit as st
-import google.generativeai as genai
 
-# Configure your Gemini API key
-GOOGLE_API_KEY = st.secrets['gemini']['api_key']
-genai.configure(api_key=GOOGLE_API_KEY)
+# ---------------- CONFIG ----------------
+st.set_page_config(page_title="Zentrix AI ⚡", page_icon="🤖", layout="wide")
 
-# Initialize the Gemini model
-model = genai.GenerativeModel('gemini-1.5-flash')
+# ---------------- CUSTOM UI ----------------
+st.markdown("""
+<style>
+body {
+    background-color: #0f172a;
+    color: white;
+}
 
-def getResponseFromModel(user_input):
-    """
-    This function sends the user's input to the Gemini model and returns the generated response.
-    """
+h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #00DBDE, #FC00FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stChatMessage {
+    padding: 12px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+}
+
+.stChatMessage.user {
+    background-color: #1e293b;
+}
+
+.stChatMessage.assistant {
+    background-color: #020617;
+    border: 1px solid #334155;
+}
+
+section[data-testid="stSidebar"] {
+    background-color: #020617;
+}
+
+button {
+    border-radius: 10px !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ---------------- API ----------------
+groq_client = Groq(api_key=st.secrets["groq"]["api_key"])
+
+# ---------------- HEADER ----------------
+st.markdown("<h1 style='text-align:center;'>⚡ Zentrix AI</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#94a3b8;'>Fast AI powered by Groq 🚀</p>", unsafe_allow_html=True)
+
+# ---------------- SIDEBAR ----------------
+st.sidebar.markdown("## 🚀 Zentrix Control Panel")
+
+temperature = st.sidebar.slider("Creativity", 0.0, 1.0, 0.7)
+
+st.sidebar.markdown("---")
+
+# ⚠️ BETTER: use local image file (rename to profile.jpg)
+st.sidebar.image(r'C:\Users\harih\OneDrive\Pictures\Saved Pictures\WhatsApp Image 2025-04-29 at 23.17.13_a412dc2d.jpg', use_column_width=True)
+
+
+st.sidebar.markdown("### 👨‍💻 Hariharan")
+st.sidebar.write("AI Engineer")
+
+st.sidebar.markdown("[LinkedIn](https://www.linkedin.com/in/hari-haran-b5aa50272/)")
+st.sidebar.markdown("[GitHub](https://github.com/hariharansuresh1971-dotcom)")
+
+st.sidebar.markdown("---")
+
+if st.sidebar.button("🗑 Clear Chat"):
+    st.session_state.messages = []
+
+# ---------------- MEMORY ----------------
+if "messages" not in st.session_state:
+    st.session_state.messages = [
+        {
+            "role": "system",
+            "content": "You are Zentrix AI, a powerful, smart, and helpful assistant. Give clear, structured answers."
+        }
+    ]
+
+# ---------------- DISPLAY ----------------
+for msg in st.session_state.messages:
+    if msg["role"] == "user":
+        st.chat_message("user").markdown(msg["content"])
+    elif msg["role"] == "assistant":
+        st.chat_message("assistant").markdown(msg["content"])
+
+# ---------------- RESPONSE ----------------
+def get_response():
     try:
-        response = model.generate_content(user_input)
-        return response.text
+        response = groq_client.chat.completions.create(
+            messages=st.session_state.messages,
+            model="llama-3.3-70b-versatile",
+            temperature=temperature,
+            stream=True
+        )
+
+        full = ""
+        placeholder = st.empty()
+
+        for chunk in response:
+            if chunk.choices[0].delta.content:
+                full += chunk.choices[0].delta.content
+                placeholder.markdown(full + "▌")
+
+        return full
+
     except Exception as e:
-        st.error(f"An error occurred: {e}")
-        return "Sorry, something went wrong. Please try again later."
+        return f"⚠️ Error: {e}"
 
-# Streamlit UI setup
-st.set_page_config(page_title="Ahmad's Chatbot", page_icon="💬")
-st.markdown("<h1 style='text-align: center;'>🤖 Welcome to Ahmad's Chatbot</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #888;'>Your AI assistant is here to help you! 🚀</p>", unsafe_allow_html=True)
+# ---------------- INPUT ----------------
+user_input = st.chat_input("Ask Zentrix AI anything...")
 
-# Sidebar setup
-st.sidebar.image('Ahmad Ali.png', use_column_width=True)
-st.sidebar.header("**Ahmad Ali Rafique**")
-st.sidebar.write("AI & Machine Learning Expert")
+if user_input:
+    st.chat_message("user").markdown(user_input)
+    st.session_state.messages.append({"role": "user", "content": user_input})
 
-st.sidebar.header("Contact Information", divider='rainbow')
-st.sidebar.write("Feel free to reach out through the following")
-st.sidebar.write("[LinkedIn](https://www.linkedin.com/in/ahmad-ali-rafique/)")
-st.sidebar.write("[GitHub](https://github.com/Ahmad-Ali-Rafique/)")
-st.sidebar.write("[Email](mailto:arsbussiness786@gmail.com)")
-st.sidebar.write("Developed by Ahmad Ali Rafique", unsafe_allow_html=True)
+    with st.chat_message("assistant"):
+        with st.spinner("Zentrix thinking..."):
+            reply = get_response()
 
-# Main content area
-st.markdown("## ✍️ Enter your query below:")
+    st.session_state.messages.append({"role": "assistant", "content": reply})
 
-# Form for user input
-with st.form(key='chat_form', clear_on_submit=True):
-    user_input = st.text_input("", placeholder="Ask me anything...", key='user_input')
-    submit_button = st.form_submit_button(label='Send')
-
-    if submit_button and user_input:
-        with st.spinner("🤔 Thinking..."):
-            output = getResponseFromModel(user_input)
-        st.markdown("### 🤖 Chatbot's Response:")
-        st.success(output)
-
-# Footer
+# ---------------- FOOTER ----------------
 st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>Developed by 🧑🏻Ahmad Ali Rafique🧑🏻</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center;'>⚡ Built by Hariharan</p>", unsafe_allow_html=True)
