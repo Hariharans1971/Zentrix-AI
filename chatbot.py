@@ -1,3 +1,4 @@
+import os
 from groq import Groq
 import streamlit as st
 
@@ -46,7 +47,14 @@ button {
 """, unsafe_allow_html=True)
 
 # ---------------- API ----------------
-groq_client = Groq(api_key=st.secrets["groq"]["api_key"])
+# Prefer Streamlit secrets; allow an environment variable for local development.
+api_key = os.getenv("GROQ_API_KEY", "").strip()
+try:
+    api_key = api_key or st.secrets.get("groq", {}).get("api_key", "")
+except Exception:
+    # Missing local secrets should not prevent the UI from loading.
+    pass
+groq_client = Groq(api_key=api_key) if api_key else None
 
 # ---------------- HEADER ----------------
 st.markdown("<h1 style='text-align:center;'>⚡ Zentrix AI</h1>", unsafe_allow_html=True)
@@ -59,15 +67,12 @@ temperature = st.sidebar.slider("Creativity", 0.0, 1.0, 0.7)
 
 st.sidebar.markdown("---")
 
-# ⚠️ BETTER: use local image file (rename to profile.jpg)
-st.sidebar.image(r'C:\Users\harih\OneDrive\Pictures\Saved Pictures\WhatsApp Image 2025-04-29 at 23.17.13_a412dc2d.jpg', use_column_width=True)
-
 
 st.sidebar.markdown("### 👨‍💻 Hariharan")
-st.sidebar.write("AI Engineer")
+st.sidebar.write("Python · AI/ML learning project")
 
 st.sidebar.markdown("[LinkedIn](https://www.linkedin.com/in/hari-haran-b5aa50272/)")
-st.sidebar.markdown("[GitHub](https://github.com/hariharansuresh1971-dotcom)")
+st.sidebar.markdown("[GitHub](https://github.com/Hariharans1971)")
 
 st.sidebar.markdown("---")
 
@@ -92,6 +97,8 @@ for msg in st.session_state.messages:
 
 # ---------------- RESPONSE ----------------
 def get_response():
+    if groq_client is None:
+        return "Groq API is not configured. Set GROQ_API_KEY or add groq.api_key to Streamlit secrets, then restart the app."
     try:
         response = groq_client.chat.completions.create(
             messages=st.session_state.messages,
