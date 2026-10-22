@@ -36,13 +36,13 @@ Python · Streamlit · Groq API · LLMs
 
 4. Configure your Groq API key locally, using the variable name expected by the application. Never commit the key.
 
-5. Run the Streamlit entry point shown in the source:
+5. Run the actual Streamlit entry point:
 
    ```bash
-   streamlit run app.py
+   streamlit run chatbot.py
    ```
 
-Check the repository's actual entry-point and dependency files before running; this README does not imply a hosted deployment.
+For local API configuration, either export `GROQ_API_KEY` or add `groq.api_key` to Streamlit's local secrets file. The included `.env.example` documents the environment-variable option; Streamlit does not automatically load `.env` unless configured to do so.
 
 ## Security
 
