@@ -1,37 +1,65 @@
+# Zentrix AI — LLM Chatbot
 
+A Python chatbot project that experiments with a conversational interface using Streamlit and the Groq API. It is a learning project for API integration and LLM-powered responses.
 
-### Hariharan
+## Features
 
-**AI & Machine Learning Specialist**
+- Chat interface built with Streamlit
+- Optional responses through the Groq API
+- Configurable model/provider integration
+- Local development workflow
 
-Welcome to my Streamlit Chatbot project! I am Hariharan, an enthusiastic AI and Machine Learning expert with a strong passion for developing intelligent systems that can solve real-world problems. My expertise lies in building and deploying machine learning models, working on deep learning projects, and creating interactive AI-driven applications.
+## Stack
 
-### Professional Background
+Python · Streamlit · Groq API · LLMs
 
-I have completed various courses and certifications in the field of AI, Machine Learning, and Deep Learning, which have equipped me with the knowledge and skills to tackle complex challenges. My educational journey includes an internship at Cloudside Technologies focused on Machine Learning, where I was selected from thousands of applicants. I have also completed a Soft Skills Program, scoring 100%, which has enhanced my ability to communicate and collaborate effectively in professional settings.
+## Run locally
 
+1. Clone the repository:
 
-### Project Highlights
+   ```bash
+   git clone https://github.com/Hariharans1971/Zentrix-AI.git
+   cd Zentrix-AI
+   ```
 
-This project demonstrates my ability to integrate advanced AI models into a user-friendly interface. Using the [Groq API], I have created a chatbot that can understand and respond to user queries effectively. The entire application is built using [Streamlit](https://streamlit.io/), making it easy to deploy and interact with.
+2. Create and activate a virtual environment:
 
-- **Model Used**: Groq (Model ID: "llama-3.3-70b-versatile")
-- **API Integration**: Integrated using the Groq AI Python package.
-- **User Interface**: Developed with Streamlit, ensuring a seamless user experience.
+   ```bash
+   python -m venv .venv
+   ```
 
-### Contact Information
+3. Install dependencies from the repository's requirements file, if present:
 
-Feel free to reach out if you have any questions or collaboration opportunities:
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
 
-- **LinkedIn**: [Hariharan](https://www.linkedin.com/in/hari-haran-b5aa50272/)
-- **GitHub**: [Hariharan](https://github.com/hariharansuresh1971-dotcom)
-- **Email**: [hariharansuresh1971@gmail.com].
+4. Configure your Groq API key locally, using the variable name expected by the application. Never commit the key.
 
-### Why This Project?
+5. Run the Streamlit entry point shown in the source:
 
-This project is a reflection of my commitment to continuous learning and applying AI technologies in practical scenarios. By working on this chatbot, I aimed to explore the capabilities of generative models and enhance my skills in deploying AI-driven applications. I believe that AI has the potential to revolutionize many aspects of our lives, and through projects like this, I hope to contribute to that change.
+   ```bash
+   streamlit run app.py
+   ```
 
----
+Check the repository's actual entry-point and dependency files before running; this README does not imply a hosted deployment.
 
-Thank you for visiting my project repository. I am always open to feedback, suggestions, and collaborative projects. Let's connect and create something amazing together!
+## Security
 
+- Keep API keys in environment variables or a local ignored `.env` file.
+- Do not commit credentials, private prompts, or personal data.
+- LLM output can be incorrect; verify important answers.
+- Review provider pricing, rate limits, and current model availability.
+
+## Roadmap
+
+- Add a documented dependency lock or tested version ranges.
+- Add tests for API failures and empty/invalid input.
+- Add a clear setup example and sanitized screenshots.
+- Document supported model IDs and actual response behavior.
+
+## Author
+
+Hariharan S. — B.Tech Computer Science and Engineering (AI & ML), 2026
+
+[GitHub](https://github.com/Hariharans1971) · [LinkedIn](https://www.linkedin.com/in/hari-haran-b5aa50272/)
