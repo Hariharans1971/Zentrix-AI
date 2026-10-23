@@ -117,8 +117,10 @@ def get_response():
 
         return full
 
-    except Exception as e:
-        return f"⚠️ Error: {e}"
+    except Exception:
+        # Do not echo provider exception details into the chat UI; they may contain
+        # request metadata or other information that should stay in logs.
+        return "⚠️ The request failed. Check your API key, network connection, model availability, and provider status, then try again."
 
 # ---------------- INPUT ----------------
 user_input = st.chat_input("Ask Zentrix AI anything...")
