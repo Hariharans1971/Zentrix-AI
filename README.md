@@ -44,12 +44,26 @@ Python · Streamlit · Groq API · LLMs
 
 For local API configuration, either export `GROQ_API_KEY` or add `groq.api_key` to Streamlit's local secrets file. The included `.env.example` documents the environment-variable option; Streamlit does not automatically load `.env` unless configured to do so.
 
+## Quality checks
+
+The GitHub Actions workflow runs a Python syntax check and scans the current working tree for common secret patterns on pushes and pull requests. The separate account-wide history audit checks old commits too; a clean current tree does not by itself prove the full Git history is free of exposed credentials.
+
+Run the syntax check locally:
+
+```bash
+python -m compileall -q chatbot.py
+```
+
 ## Security
 
-- Keep API keys in environment variables or a local ignored `.env` file.
+- Keep API keys in environment variables or a local secrets file excluded from Git.
+- `.env.example` is a template only; the app reads the environment directly and does not automatically load `.env`.
+- If a credential is ever committed, revoke or rotate it with its provider first. Deleting the file from the latest commit does not remove it from old Git history.
 - Do not commit credentials, private prompts, or personal data.
+- Provider errors are presented as a generic message in the chat UI instead of echoing exception details.
 - LLM output can be incorrect; verify important answers.
-- Review provider pricing, rate limits, and current model availability.
+
+See [SECURITY.md](SECURITY.md) for reporting guidance and credential-handling rules.
 
 ## Roadmap
 
