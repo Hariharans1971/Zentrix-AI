@@ -1,5 +1,7 @@
 # Zentrix AI — LLM Chatbot
 
+[![Validation](https://github.com/Hariharans1971/Zentrix-AI/actions/workflows/validate.yml/badge.svg)](https://github.com/Hariharans1971/Zentrix-AI/actions/workflows/validate.yml) · [Source and history audit](https://github.com/Hariharans1971/portfolio/actions/workflows/account-secret-audit.yml)
+
 A Python chatbot project that experiments with a conversational interface using Streamlit and the Groq API. It is a learning project for API integration and LLM-powered responses.
 
 ## Features
